@@ -8,7 +8,7 @@ import os
     :return: The `index` function returns the rendered template "index.html". The `get_weather` function
     returns the rendered template "index.html" with the temperature, description, icon, and location
     variables passed as arguments. The `handle_key_error` function returns the rendered template
-    "index.html" with the error_message variable passed as an argument.
+    "index.html" with the error_message variable passed as an argument..
     """
 
 app = Flask(__name__)
