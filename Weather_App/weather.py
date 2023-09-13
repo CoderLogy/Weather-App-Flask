@@ -2,6 +2,18 @@ import requests
 from flask import Flask,render_template,request
 import os
 
+<<<<<<< Updated upstream
+=======
+"""
+    This is a Flask web application that retrieves weather data for a given city using the WeatherAPI
+    and displays it on an HTML template.
+    :return: The `index` function returns the rendered template "index.html". The `get_weather` function
+    returns the rendered template "index.html" with the temperature, description, icon, and location
+    variables passed as arguments. The `handle_key_error` function returns the rendered template
+    "index.html" with the error_message variable passed as an argument.
+    """
+
+>>>>>>> Stashed changes
 app = Flask(__name__)
 
 @app.route("/",methods=["GET"])
