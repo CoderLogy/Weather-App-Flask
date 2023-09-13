@@ -2,8 +2,7 @@ import requests
 from flask import Flask,render_template,request
 import os
 
-<<<<<<< Updated upstream
-=======
+
 """
     This is a Flask web application that retrieves weather data for a given city using the WeatherAPI
     and displays it on an HTML template.
@@ -13,7 +12,7 @@ import os
     "index.html" with the error_message variable passed as an argument.
     """
 
->>>>>>> Stashed changes
+
 app = Flask(__name__)
 
 @app.route("/",methods=["GET"])
