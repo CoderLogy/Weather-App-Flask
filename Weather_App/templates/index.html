@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css')}}">
+    <link rel="icon" type="image" href="{{ icon }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app</title>
+</head>
+<body>    
+    <form action="/weather" method="POST">
+    <label for="city">City: </label>
+    <input type="text" id="city" name="city" placeholder="Enter city name" required>
+    <button type="submit">Get Weather</button>
+    </form>
+    <h1>Current Weather of {{ location }}</h1>
+    <p>Temperature: {{ temperature }}°C</p>
+    <p>Description: {{ description }}</p>
+    <img src="{{ icon }}">
+</body>
+<script>
+{% if error_message %}
+    window.onload = function () {
+        alert("{{ error_message }}");
+    }
+    {% endif %}
+    </script>
+</html>
