@@ -1,5 +1,6 @@
 import requests
 from flask import Flask,render_template,request
+from datetime import datetime
 import os
 
 
@@ -21,14 +22,29 @@ def index():
 def get_weather():
     city = request.form["city"]
     api = os.getenv("API_KEY")
-    url = f"https://api.weatherapi.com/v1/current.json?key={api}&q={city}"
+    url = f"https://api.weatherapi.com/v1/current.json?key={api}&q={city}&aqi=yes"
     response = requests.get(url)
     data = response.json()
-    temperature = data["current"]["temp_c"]
-    description = data["current"]["condition"]["text"]
-    icon = data["current"]["condition"]["icon"]
-    location = data["location"]["name"]
-    return render_template("index.html",temperature=temperature,description=description,icon = icon,location = location)
+    current_data = data["current"]
+    location_data = data["location"]
+
+    temperature_c = current_data["temp_c"]
+    temperature_f = current_data["temp_f"]
+    description = current_data["condition"]["text"]
+    icon = current_data["condition"]["icon"]
+    location = location_data["name"]
+    country = location_data["country"]
+    aqi = current_data["air_quality"]["gb-defra-index"]
+
+    current_time = datetime.strptime(location_data["localtime"], r"%Y-%m-%d %H:%M")
+    formatted_time = current_time.strftime("%H:%M")
+
+    text1 = f"Current Weather of {location}, {country}"
+    text2 = f"Temperature: {temperature_c} °C / {temperature_f} °F"
+    text3 = f"Description: {description}"
+    crtime = f"Current time there: {formatted_time} hours (24-hour format)"
+    aqi = f"Aqi: {aqi} ( <7 very dangerous )"
+    return render_template("index.html",aqi=aqi,icon=icon,text3=text3,crtime=crtime,text1=text1,text2=text2)
 
 @app.errorhandler(KeyError)
 def handle_key_error(error):    
